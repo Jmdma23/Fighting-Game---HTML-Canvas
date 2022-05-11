@@ -1,0 +1,29 @@
+{
+  "name": "fighting-game",
+  "version": "1.0.0",
+  "description": "This is a project created arround a youtube video to try and experiment with HTML canvas in game development.",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jmdma23/Fighting-Game---HTML-Canvas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jmdma23/Fighting-Game---HTML-Canvas/issues"
+  },
+  "homepage": "https://github.com/Jmdma23/Fighting-Game---HTML-Canvas#readme",
+  "devDependencies": {
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
