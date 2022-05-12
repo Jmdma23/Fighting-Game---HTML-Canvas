@@ -74,7 +74,7 @@ function animate(currentTime) {
     enemy.velocity.x = -36;
   }
 
-  context.fillStyle = 'black';
+  context.fillStyle = 'gray';
   context.fillRect(0, 0, canvas.width, canvas.height);
   player.update(context, canvas, secondsSinceLastRender);
   enemy.update(context, canvas, secondsSinceLastRender);
