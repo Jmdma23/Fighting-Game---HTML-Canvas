@@ -5,6 +5,8 @@ import Sprite from './sprite.js';
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
+let lastRenderTime = 0
+
 canvas.width = 1024;
 canvas.height = 576;
 
@@ -40,36 +42,37 @@ const keys = {
   ArrowRight: { pressed: false }
 }
 
-function animate() {
-  window.requestAnimationFrame(animate);
-  context.fillStyle = 'black';
-  context.fillRect(0, 0, canvas.width, canvas.height);
-  player.update(context, canvas);
-  enemy.update(context, canvas);
 
+function animate(currentTime) {
+    const secondsSinceLastRender = (currentTime - lastRenderTime) / 100;
 
+    //player movement
+    player.velocity.x = 0;
+    if (keys.a.pressed && player.lastkey == 'a') {
+      player.velocity.x = -36;
+    } else if (keys.d.pressed && player.lastkey == 'd') {
+      player.velocity.x = 36;
+    }
 
-  //player movement
-  player.velocity.x = 0;
-  if (keys.a.pressed && player.lastkey == 'a') {
-    player.velocity.x = -3;
-  } else if (keys.d.pressed && player.lastkey == 'd') {
-    player.velocity.x = 3;
-  }
+    //enemy movement
+    enemy.velocity.x = 0;
+    if (keys.ArrowRight.pressed && enemy.lastkey == 'ArrowRight') {
+      enemy.velocity.x = 36;
+    } else if (keys.ArrowLeft.pressed && enemy.lastkey == 'ArrowLeft') {
+      enemy.velocity.x = -36;
+    }
 
-  //enemy movement
-  enemy.velocity.x = 0;
-  if (keys.ArrowRight.pressed && enemy.lastkey == 'ArrowRight') {
-    enemy.velocity.x = 3;
-  } else if (keys.ArrowLeft.pressed && enemy.lastkey == 'ArrowLeft') {
-    enemy.velocity.x = -3;
-  }
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    player.update(context, canvas,secondsSinceLastRender);
+    enemy.update(context, canvas,secondsSinceLastRender);
+
+    lastRenderTime = currentTime;
+    
+    window.requestAnimationFrame(animate);
 }
 
-animate();
-
 window.addEventListener('keydown', (e) => {
-  e.preventDefault();
   switch (e.key) {
     //player keys
     case 'd':
@@ -81,9 +84,10 @@ window.addEventListener('keydown', (e) => {
       player.lastkey = 'a'
       break
     case 'w':
-      player.velocity.y = -20;
+      if(player.velocity.y == 0)
+        player.velocity.y = -250;
       break
-  //enemy keys 
+    //enemy keys 
     case 'ArrowRight':
       keys.ArrowRight.pressed = true;
       enemy.lastkey = 'ArrowRight'
@@ -93,7 +97,8 @@ window.addEventListener('keydown', (e) => {
       enemy.lastkey = 'ArrowLeft'
       break
     case 'ArrowUp':
-      enemy.velocity.y = -20;
+      if(player.velocity.y == 0)
+        enemy.velocity.y = -250;
       break
   }
 })
@@ -116,3 +121,5 @@ window.addEventListener('keyup', (e) => {
       break
   }
 })
+
+window.requestAnimationFrame(animate);
