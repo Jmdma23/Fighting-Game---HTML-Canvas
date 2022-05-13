@@ -1,3 +1,63 @@
-.hello {
-    color: red;
+
+/* ---- Root ----*/
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* ---- Interface ----*/
+.player-hp-bar,
+.enemy-hp-bar{
+    background-color: yellow;
+    height: 30px;
+    width: 100%;
+    
+}
+
+
+.player-hp-wrapper,
+.enemy-hp-wrapper{
+    position: relative;
+    height: 30px;
+    width: 100%;
+}
+
+.player-hp-wrapper{
+    display: flex;
+    justify-content: end;
+}
+
+.player-hp-wrapper .hp,
+.enemy-hp-wrapper .hp{
+    position: absolute;
+    background-color: blue;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.enemy-hp-wrapper .hp{
+    left: 0;
+}
+
+.canvas-wrapper{
+    position: relative;
+    display: inline-block;
+}
+
+.interface-wrapper{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 16px;
+}
+
+.timer{
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
 }

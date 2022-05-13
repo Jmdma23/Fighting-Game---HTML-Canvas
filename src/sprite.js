@@ -19,6 +19,7 @@ export default class Sprite {
       }
       this.color = color;
       this.isAttacking;
+      this.health = 100;
     }
 
     draw(context) {
